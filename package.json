@@ -1,0 +1,95 @@
+{
+  "name": "vite-plugin-compressor",
+  "version": "0.1.0",
+  "description": "A high-performance Vite plugin that compresses build assets using Brotli, Gzip, and Zstandard with worker thread support.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "lint": "eslint .",
+    "prepublishOnly": "npm run build && npm run test:run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riyajath-ahamed/vite-plugin-brotli-compress.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "compress",
+    "brotli",
+    "gzip",
+    "zstd",
+    "zstandard",
+    "compression",
+    "build",
+    "optimization",
+    "performance",
+    "bundle-size",
+    "assets",
+    "static-compression",
+    "vite-plugin-compress",
+    "pre-compression",
+    "worker-threads",
+    "integrity",
+    "build-report",
+    "react",
+    "typescript"
+  ],
+  "author": "riyajath-ahamed <riyajath.ahamed@gmail.com> (https://github.com/riyajath-ahamed)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riyajath-ahamed/vite-plugin-brotli-compress/issues"
+  },
+  "homepage": "https://github.com/riyajath-ahamed/vite-plugin-brotli-compress#readme",
+  "peerDependencies": {
+    "vite": ">=5.0.0 <8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.2",
+    "@vitest/coverage-v8": "^4.1.4",
+    "@vitest/ui": "^4.1.4",
+    "eslint": "^10.3.0",
+    "piscina": "^5.1.4",
+    "tsdown": "^0.21.7",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.59.1",
+    "vitest": "^4.1.4"
+  },
+  "optionalDependencies": {
+    "@mongodb-js/zstd": "^7.0.0",
+    "@rolldown/binding-linux-x64-gnu": "^1.0.0-rc.12",
+    "piscina": "^5.1.4"
+  },
+  "overrides": {
+    "vitest": {
+      "vite": "^7.3.2"
+    },
+    "postcss": ">=8.5.10"
+  }
+}
