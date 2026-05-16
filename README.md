@@ -23,20 +23,6 @@ A high-performance Vite plugin that compresses build assets using Brotli, Gzip, 
 
 ---
 
-> **Renamed:** This package was previously published as [`vite-plugin-brotli-compress`](https://www.npmjs.com/package/vite-plugin-brotli-compress). It has been renamed to `vite-plugin-bundler` to better reflect its expanded scope — the plugin now supports **Brotli**, **Gzip**, and **Zstandard (Zstd)** compression. If you're upgrading from `vite-plugin-brotli-compress`, simply update the package name in your `package.json` and imports:
->
-> ```bash
-> npm uninstall vite-plugin-brotli-compress
-> npm install --save-dev vite-plugin-bundler
-> ```
->
-> ```diff
-> - import brotliCompress from 'vite-plugin-brotli-compress'
-> + import brotliCompress from 'vite-plugin-bundler'
-> ```
-
----
-
 ## What's New
 
 - **Zstandard compression** (`CompressionType.ZSTD`) — the only Vite compression plugin with zstd support. Uses native `zlib` on Node 21.7+ or `@mongodb-js/zstd` on older versions.
@@ -44,11 +30,6 @@ A high-performance Vite plugin that compresses build assets using Brotli, Gzip, 
 - **Build report** (`compressionReport: './stats.json'`) — writes per-file compression stats to a JSON file for CI dashboards and bundle size tracking.
 - **Integrity verification** (`verifyIntegrity: true`) — SHA-256 hash verification of compressed files post-write catches disk corruption and partial writes.
 - **Vite 5+ minimum** — dropped Vite 4 support; tested against Vite 5, 6, and 7.
-
-### Breaking Changes
-
-- Minimum Vite version is now `>=5.0.0` (was `>=4.0.0`)
-- `FileCompressionDetail.algorithm` type now includes `'zstd'`
 
 ---
 
@@ -107,6 +88,20 @@ npm install @mongodb-js/zstd
 # For worker thread support
 npm install piscina
 ```
+
+---
+
+> **Renamed:** This package was previously published as [`vite-plugin-brotli-compress`](https://www.npmjs.com/package/vite-plugin-brotli-compress). It has been renamed to `vite-plugin-bundler` to better reflect its expanded scope — the plugin now supports **Brotli**, **Gzip**, and **Zstandard (Zstd)** compression. If you're upgrading from `vite-plugin-brotli-compress`, simply update the package name in your `package.json` and imports:
+>
+> ```bash
+> npm uninstall vite-plugin-brotli-compress
+> npm install --save-dev vite-plugin-bundler
+> ```
+>
+> ```diff
+> - import brotliCompress from 'vite-plugin-brotli-compress'
+> + import brotliCompress from 'vite-plugin-bundler'
+> ```
 
 ---
 
