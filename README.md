@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/riyajath-ahamed/vite-plugin-bundler/blob/main/assets/riyajath-ahamed/vite-plugin-bundler.svg" width="640" height="320" />
+<img src="https://github.com/riyajath-ahamed/vite-plugin-bundler/blob/main/assets/riyajath-ahamed/vite-plugin-bundler.png" width="640" height="320" />
 </p>
 
 <h1 align="center">vite-plugin-bundler</h1>
@@ -37,7 +37,7 @@ A high-performance Vite plugin that compresses build assets using Brotli, Gzip, 
 
 ---
 
-## What's New in v2.0
+## What's New
 
 - **Zstandard compression** (`CompressionType.ZSTD`) — the only Vite compression plugin with zstd support. Uses native `zlib` on Node 21.7+ or `@mongodb-js/zstd` on older versions.
 - **Worker threads** (`useWorkerThreads: true`) — offloads CPU-bound compression to a [Piscina](https://github.com/piscinajs/piscina) thread pool for faster large builds.
