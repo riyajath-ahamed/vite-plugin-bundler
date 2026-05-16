@@ -41,6 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions
 - Vite compatibility: v4.0.0 through v7.x.x
 
-[1.3.0]: https://github.com/riyajath-ahamed/vite-plugin-brotli-compress/releases/tag/v1.3.0
-[1.1.0]: https://github.com/riyajath-ahamed/vite-plugin-brotli-compress/releases/tag/v1.1.0
-[1.0.0]: https://github.com/riyajath-ahamed/vite-plugin-brotli-compress/releases/tag/v1.0.0
+[1.3.0]: https://github.com/riyajath-ahamed/vite-plugin-bundler/releases/tag/v1.3.0
+[1.1.0]: https://github.com/riyajath-ahamed/vite-plugin-bundler/releases/tag/v1.1.0
+[1.0.0]: https://github.com/riyajath-ahamed/vite-plugin-bundler/releases/tag/v1.0.0

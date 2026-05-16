@@ -612,7 +612,7 @@ describe('v1.3.0 Features', () => {
       });
 
       expect(plugin).toBeDefined();
-      expect(plugin.name).toBe('vite-plugin-brotli-compress');
+      expect(plugin.name).toBe('vite-plugin-bundler');
     });
 
     it('should be backward compatible with v1.2.0 options', () => {
@@ -633,7 +633,7 @@ describe('v1.3.0 Features', () => {
       });
 
       expect(plugin).toBeDefined();
-      expect(plugin.name).toBe('vite-plugin-brotli-compress');
+      expect(plugin.name).toBe('vite-plugin-bundler');
     });
   });
 });

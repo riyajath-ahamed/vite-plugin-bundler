@@ -10,7 +10,7 @@ vi.mock('zlib');
 const mockFs = vi.mocked(fs);
 const mockZlib = vi.mocked(zlib);
 
-describe('vite-plugin-brotli-compress', () => {
+describe('vite-plugin-bundler', () => {
   let mockConfig: any;
   let mockReadStream: any;
   let mockWriteStream: any;
@@ -93,7 +93,7 @@ describe('vite-plugin-brotli-compress', () => {
       const plugin = brotliCompress();
       
       expect(plugin).toBeDefined();
-      expect(plugin.name).toBe('vite-plugin-brotli-compress');
+      expect(plugin.name).toBe('vite-plugin-bundler');
       expect(plugin.configResolved).toBeDefined();
       expect(plugin.closeBundle).toBeDefined();
     });
@@ -112,7 +112,7 @@ describe('vite-plugin-brotli-compress', () => {
       const plugin = brotliCompress(options);
       
       expect(plugin).toBeDefined();
-      expect(plugin.name).toBe('vite-plugin-brotli-compress');
+      expect(plugin.name).toBe('vite-plugin-bundler');
     });
   });
 

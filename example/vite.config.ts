@@ -1,7 +1,7 @@
 // vite.config.ts
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import brotliCompress, { BrotliQuality } from 'vite-plugin-brotli-compress'
+import brotliCompress, { BrotliQuality } from 'vite-plugin-bundler'
 
 export default defineConfig({
   plugins: [

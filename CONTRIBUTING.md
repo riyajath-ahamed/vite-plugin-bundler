@@ -1,6 +1,6 @@
-# Contributing to vite-plugin-brotli-compress
+# Contributing to vite-plugin-bundler
 
-Thank you for your interest in contributing to `vite-plugin-brotli-compress`! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to `vite-plugin-bundler`! This document provides guidelines and information for contributors.
 
 ## Table of Contents
 
@@ -23,12 +23,12 @@ This project follows the [Contributor Covenant Code of Conduct](https://www.cont
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/vite-plugin-brotli-compress.git
-   cd vite-plugin-brotli-compress
+   git clone https://github.com/YOUR_USERNAME/vite-plugin-bundler.git
+   cd vite-plugin-bundler
    ```
 3. **Add the upstream remote**:
    ```bash
-   git remote add upstream https://github.com/riyajath-ahamed/vite-plugin-brotli-compress.git
+   git remote add upstream https://github.com/riyajath-ahamed/vite-plugin-bundler.git
    ```
 
 ## Development Setup
@@ -249,4 +249,4 @@ By contributing to this project, you agree that your contributions will be licen
 
 ---
 
-Thank you for contributing to `vite-plugin-brotli-compress`! 🚀
+Thank you for contributing to `vite-plugin-bundler`! 🚀

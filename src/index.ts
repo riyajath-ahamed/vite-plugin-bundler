@@ -441,7 +441,7 @@ export default function brotliCompress(options: BrotliOptions = {}): Plugin {
   } = options;
 
   return {
-    name: 'vite-plugin-brotli-compress',
+    name: 'vite-plugin-bundler',
 
     // Hook into the resolved Vite configuration.
     configResolved(resolvedConfig) {
@@ -457,7 +457,7 @@ export default function brotliCompress(options: BrotliOptions = {}): Plugin {
         const compressionType = type === CompressionType.BOTH ? 'Brotli and Gzip' :
                                type === CompressionType.GZIP ? 'Gzip' :
                                type === CompressionType.ZSTD ? 'Zstd' : 'Brotli';
-        console.log(`\n[vite-plugin-brotli-compress] Starting ${compressionType} compression...`);
+        console.log(`\n[vite-plugin-bundler] Starting ${compressionType} compression...`);
       }
 
       try {
@@ -476,7 +476,7 @@ export default function brotliCompress(options: BrotliOptions = {}): Plugin {
 
         if (filesToCompress.length === 0) {
           if (verbose) {
-            console.log('[vite-plugin-brotli-compress] No matching files found to compress.');
+            console.log('[vite-plugin-bundler] No matching files found to compress.');
           }
           return;
         }
@@ -522,11 +522,11 @@ export default function brotliCompress(options: BrotliOptions = {}): Plugin {
         if (compressionReport) {
           writeCompressionReport(stats, compressionReport, type);
           if (verbose) {
-            console.log(`[vite-plugin-brotli-compress] Report written to ${compressionReport}`);
+            console.log(`[vite-plugin-bundler] Report written to ${compressionReport}`);
           }
         }
       } catch (error) {
-        console.error('[vite-plugin-brotli-compress] Error during compression:', error);
+        console.error('[vite-plugin-bundler] Error during compression:', error);
         if (!continueOnError) {
           throw error;
         }
@@ -736,7 +736,7 @@ async function compressFiles(
           } else {
             stats.failedFiles++;
             if (options.verbose) {
-              console.warn(`[vite-plugin-brotli-compress] Failed to compress file: ${result.reason}`);
+              console.warn(`[vite-plugin-bundler] Failed to compress file: ${result.reason}`);
             }
           }
           emitProgress(options, files[processedIndex], processedIndex, files.length);
@@ -752,7 +752,7 @@ async function compressFiles(
         } catch (error) {
           stats.failedFiles++;
           if (options.verbose) {
-            console.warn(`[vite-plugin-brotli-compress] Failed to compress file ${filePath}:`, error);
+            console.warn(`[vite-plugin-bundler] Failed to compress file ${filePath}:`, error);
           }
           if (options.errorCallback) {
             options.errorCallback(error as Error, filePath);
@@ -795,7 +795,7 @@ function getWorkerPath(): string {
   }
 
   throw new Error(
-    '[vite-plugin-brotli-compress] Worker file not found. ' +
+    '[vite-plugin-bundler] Worker file not found. ' +
     'Ensure the package is properly installed (run npm run build).'
   );
 }
@@ -863,7 +863,7 @@ async function compressFileWithWorker(
           const verified = await verifyCompressedFile(workerResult.compressedPath, workerResult.hash);
           if (!verified) {
             if (options.verbose) {
-              console.warn(`[vite-plugin-brotli-compress] Integrity check FAILED for ${workerResult.compressedPath}`);
+              console.warn(`[vite-plugin-bundler] Integrity check FAILED for ${workerResult.compressedPath}`);
             }
             results.failedFiles++;
             try { fs.unlinkSync(workerResult.compressedPath); } catch { /* ignore */ }
@@ -888,7 +888,7 @@ async function compressFileWithWorker(
     } catch (error) {
       results.failedFiles++;
       if (options.verbose) {
-        console.warn(`[vite-plugin-brotli-compress] ${algo} worker compression failed for ${filePath}:`, error);
+        console.warn(`[vite-plugin-bundler] ${algo} worker compression failed for ${filePath}:`, error);
       }
     }
   }
@@ -920,7 +920,7 @@ async function compressFileWithRetry(
       lastError = error as Error;
       if (attempt < options.retryAttempts) {
         if (options.verbose) {
-          console.warn(`[vite-plugin-brotli-compress] Retry ${attempt + 1}/${options.retryAttempts} for ${filePath}`);
+          console.warn(`[vite-plugin-bundler] Retry ${attempt + 1}/${options.retryAttempts} for ${filePath}`);
         }
         // Wait before retry (exponential backoff)
         await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 100));
@@ -972,7 +972,7 @@ function meetsThreshold(
     }
     if (verbose) {
       console.log(
-        `[vite-plugin-brotli-compress] Skipped ${compressedPath} (ratio ${(ratio * 100).toFixed(1)}% < threshold ${(threshold * 100).toFixed(1)}%)`
+        `[vite-plugin-bundler] Skipped ${compressedPath} (ratio ${(ratio * 100).toFixed(1)}% < threshold ${(threshold * 100).toFixed(1)}%)`
       );
     }
     return false;
@@ -1015,7 +1015,7 @@ function compressFile(
               const verified = await verifyCompressedFile(compressedPath, brotliResult.hash);
               if (!verified) {
                 if (options.verbose) {
-                  console.warn(`[vite-plugin-brotli-compress] Integrity check FAILED for ${compressedPath}`);
+                  console.warn(`[vite-plugin-bundler] Integrity check FAILED for ${compressedPath}`);
                 }
                 results.failedFiles++;
                 try { fs.unlinkSync(compressedPath); } catch { /* ignore */ }
@@ -1047,7 +1047,7 @@ function compressFile(
         } catch (error) {
           results.failedFiles++;
           if (options.verbose) {
-            console.warn(`[vite-plugin-brotli-compress] Brotli compression failed for ${filePath}:`, error);
+            console.warn(`[vite-plugin-bundler] Brotli compression failed for ${filePath}:`, error);
           }
         }
       }
@@ -1063,7 +1063,7 @@ function compressFile(
               const verified = await verifyCompressedFile(compressedPath, gzipResult.hash);
               if (!verified) {
                 if (options.verbose) {
-                  console.warn(`[vite-plugin-brotli-compress] Integrity check FAILED for ${compressedPath}`);
+                  console.warn(`[vite-plugin-bundler] Integrity check FAILED for ${compressedPath}`);
                 }
                 results.failedFiles++;
                 try { fs.unlinkSync(compressedPath); } catch { /* ignore */ }
@@ -1095,7 +1095,7 @@ function compressFile(
         } catch (error) {
           results.failedFiles++;
           if (options.verbose) {
-            console.warn(`[vite-plugin-brotli-compress] Gzip compression failed for ${filePath}:`, error);
+            console.warn(`[vite-plugin-bundler] Gzip compression failed for ${filePath}:`, error);
           }
         }
       }
@@ -1111,7 +1111,7 @@ function compressFile(
               const verified = await verifyCompressedFile(compressedPath, zstdResult.hash);
               if (!verified) {
                 if (options.verbose) {
-                  console.warn(`[vite-plugin-brotli-compress] Integrity check FAILED for ${compressedPath}`);
+                  console.warn(`[vite-plugin-bundler] Integrity check FAILED for ${compressedPath}`);
                 }
                 results.failedFiles++;
                 try { fs.unlinkSync(compressedPath); } catch { /* ignore */ }
@@ -1143,7 +1143,7 @@ function compressFile(
         } catch (error) {
           results.failedFiles++;
           if (options.verbose) {
-            console.warn(`[vite-plugin-brotli-compress] Zstd compression failed for ${filePath}:`, error);
+            console.warn(`[vite-plugin-bundler] Zstd compression failed for ${filePath}:`, error);
           }
         }
       }
@@ -1154,7 +1154,7 @@ function compressFile(
           fs.unlinkSync(filePath);
         } catch (error) {
           if (options.verbose) {
-            console.warn(`[vite-plugin-brotli-compress] Failed to delete original file ${filePath}:`, error);
+            console.warn(`[vite-plugin-bundler] Failed to delete original file ${filePath}:`, error);
           }
         }
       }
@@ -1355,7 +1355,7 @@ function checkBudget(stats: CompressionStats, budget: BudgetOptions): void {
 
   if (violations.length === 0) return;
 
-  const header = '[vite-plugin-brotli-compress] Budget exceeded:';
+  const header = '[vite-plugin-bundler] Budget exceeded:';
   const message = `${header}\n${violations.map(v => `  - ${v}`).join('\n')}`;
 
   if (action === 'error') {
@@ -1409,7 +1409,7 @@ function writeCompressionReport(stats: CompressionStats, reportPath: string, typ
  * Logs compression results to the console.
  */
 function logCompressionResults(stats: CompressionStats, type: CompressionType): void {
-  console.log('\n[vite-plugin-brotli-compress] Compression Results:');
+  console.log('\n[vite-plugin-bundler] Compression Results:');
   console.log(`  Total files processed: ${stats.totalFiles}`);
   console.log(`  Successfully compressed: ${stats.compressedFiles}`);
   console.log(`  Skipped: ${stats.skippedFiles}`);

@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-brotli-compress-example",
+  "name": "vite-plugin-bundler-example",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "vite-plugin-brotli-compress": "^1.0.0"
+    "vite-plugin-bundler": "^1.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

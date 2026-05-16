@@ -98,8 +98,8 @@ jobs:
 
             ### Installation
             ```bash
-            npm install vite-plugin-brotli-compress@${{ steps.bump.outputs.version }}
+            npm install vite-plugin-bundler@${{ steps.bump.outputs.version }}
             ```
 
             ### Documentation
-            Full documentation: https://github.com/riyajath-ahamed/vite-plugin-brotli-compress#readme
+            Full documentation: https://github.com/riyajath-ahamed/vite-plugin-bundler#readme

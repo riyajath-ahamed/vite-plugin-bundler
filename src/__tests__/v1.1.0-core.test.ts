@@ -33,7 +33,7 @@ describe('v1.1.0 New Features - Core Functionality', () => {
       });
       
       expect(plugin).toBeDefined();
-      expect(plugin.name).toBe('vite-plugin-brotli-compress');
+      expect(plugin.name).toBe('vite-plugin-bundler');
     });
 
     it('should create plugin with both compression types', () => {
@@ -43,7 +43,7 @@ describe('v1.1.0 New Features - Core Functionality', () => {
       });
       
       expect(plugin).toBeDefined();
-      expect(plugin.name).toBe('vite-plugin-brotli-compress');
+      expect(plugin.name).toBe('vite-plugin-bundler');
     });
 
     it('should create plugin with gzip level', () => {
@@ -124,7 +124,7 @@ describe('v1.1.0 New Features - Core Functionality', () => {
       });
       
       expect(plugin).toBeDefined();
-      expect(plugin.name).toBe('vite-plugin-brotli-compress');
+      expect(plugin.name).toBe('vite-plugin-bundler');
     });
   });
 
@@ -204,7 +204,7 @@ describe('v1.1.0 New Features - Core Functionality', () => {
       });
       
       expect(plugin).toBeDefined();
-      expect(plugin.name).toBe('vite-plugin-brotli-compress');
+      expect(plugin.name).toBe('vite-plugin-bundler');
     });
 
     it('should default to Brotli compression when no type specified', () => {

@@ -33,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/riyajath-ahamed/vite-plugin-brotli-compress.git"
+    "url": "git+https://github.com/riyajath-ahamed/vite-plugin-bundler.git"
   },
   "engines": {
     "node": ">=18"
@@ -64,9 +64,9 @@
   "author": "riyajath-ahamed <riyajath.ahamed@gmail.com> (https://github.com/riyajath-ahamed)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/riyajath-ahamed/vite-plugin-brotli-compress/issues"
+    "url": "https://github.com/riyajath-ahamed/vite-plugin-bundler/issues"
   },
-  "homepage": "https://github.com/riyajath-ahamed/vite-plugin-brotli-compress#readme",
+  "homepage": "https://github.com/riyajath-ahamed/vite-plugin-bundler#readme",
   "peerDependencies": {
     "vite": ">=5.0.0 <8.0.0"
   },

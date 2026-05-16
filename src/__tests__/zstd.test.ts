@@ -71,7 +71,7 @@ describe('Zstd Compression Support', () => {
       });
 
       expect(plugin).toBeDefined();
-      expect(plugin.name).toBe('vite-plugin-brotli-compress');
+      expect(plugin.name).toBe('vite-plugin-bundler');
     });
 
     it('should accept zstdLevel option', () => {

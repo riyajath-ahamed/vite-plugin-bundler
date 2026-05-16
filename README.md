@@ -1,25 +1,39 @@
 <p align="center">
-<img src="https://github.com/riyajath-ahamed/vite-plugin-brotli-compress/blob/main/assets/riyajath-ahamed/vite-plugin-brotli-compress.svg" width="640" height="320" />
+<img src="https://github.com/riyajath-ahamed/vite-plugin-bundler/blob/main/assets/riyajath-ahamed/vite-plugin-bundler.svg" width="640" height="320" />
 </p>
 
-<h1 align="center">vite-plugin-compressor</h1>
+<h1 align="center">vite-plugin-bundler</h1>
 
 <p align="center">
 A high-performance Vite plugin that compresses build assets using Brotli, Gzip, and Zstandard (zstd), reducing bundle sizes by up to 80% and improving loading times.
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/vite-plugin-brotli-compress"><img src="https://img.shields.io/npm/v/vite-plugin-brotli-compress.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="npm version" /></a>
-  <a href="https://www.npmjs.com/package/vite-plugin-brotli-compress"><img src="https://img.shields.io/npm/dm/vite-plugin-brotli-compress.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="npm downloads" /></a>
-  <a href="https://bundlephobia.com/package/vite-plugin-brotli-compress"><img src="https://img.shields.io/bundlephobia/minzip/vite-plugin-brotli-compress?style=flat&colorA=18181B&colorB=28CF8D&label=minzip" alt="bundle size" /></a>
-  <a href="https://github.com/riyajath-ahamed/vite-plugin-brotli-compress/actions/workflows/ci.yml"><img src="https://github.com/riyajath-ahamed/vite-plugin-brotli-compress/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://codecov.io/gh/riyajath-ahamed/vite-plugin-brotli-compress"><img src="https://codecov.io/gh/riyajath-ahamed/vite-plugin-brotli-compress/branch/main/graph/badge.svg" alt="codecov" /></a>
-  <a href="https://github.com/riyajath-ahamed/vite-plugin-brotli-compress"><img src="https://img.shields.io/github/stars/riyajath-ahamed/vite-plugin-brotli-compress?style=flat&colorA=18181B&colorB=28CF8D" alt="GitHub stars" /></a>
+  <a href="https://www.npmjs.com/package/vite-plugin-bundler"><img src="https://img.shields.io/npm/v/vite-plugin-bundler.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/vite-plugin-bundler"><img src="https://img.shields.io/npm/dm/vite-plugin-bundler.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="npm downloads" /></a>
+  <a href="https://bundlephobia.com/package/vite-plugin-bundler"><img src="https://img.shields.io/bundlephobia/minzip/vite-plugin-bundler?style=flat&colorA=18181B&colorB=28CF8D&label=minzip" alt="bundle size" /></a>
+  <a href="https://github.com/riyajath-ahamed/vite-plugin-bundler/actions/workflows/ci.yml"><img src="https://github.com/riyajath-ahamed/vite-plugin-bundler/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://codecov.io/gh/riyajath-ahamed/vite-plugin-bundler"><img src="https://codecov.io/gh/riyajath-ahamed/vite-plugin-bundler/branch/main/graph/badge.svg" alt="codecov" /></a>
+  <a href="https://github.com/riyajath-ahamed/vite-plugin-bundler"><img src="https://img.shields.io/github/stars/riyajath-ahamed/vite-plugin-bundler?style=flat&colorA=18181B&colorB=28CF8D" alt="GitHub stars" /></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat&colorA=18181B" alt="License: MIT" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat&colorA=18181B&logo=typescript&logoColor=white" alt="TypeScript" /></a>
-  <a href="https://nodejs.org"><img src="https://img.shields.io/node/v/vite-plugin-brotli-compress?style=flat&colorA=18181B&colorB=28CF8D" alt="node version" /></a>
-  <a href="https://www.npmjs.com/package/vite-plugin-brotli-compress"><img src="https://img.shields.io/npm/types/vite-plugin-brotli-compress?style=flat&colorA=18181B&colorB=28CF8D" alt="types included" /></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/node/v/vite-plugin-bundler?style=flat&colorA=18181B&colorB=28CF8D" alt="node version" /></a>
+  <a href="https://www.npmjs.com/package/vite-plugin-bundler"><img src="https://img.shields.io/npm/types/vite-plugin-bundler?style=flat&colorA=18181B&colorB=28CF8D" alt="types included" /></a>
 </p>
+
+---
+
+> **Renamed:** This package was previously published as [`vite-plugin-brotli-compress`](https://www.npmjs.com/package/vite-plugin-brotli-compress). It has been renamed to `vite-plugin-bundler` to better reflect its expanded scope — the plugin now supports **Brotli**, **Gzip**, and **Zstandard (Zstd)** compression. If you're upgrading from `vite-plugin-brotli-compress`, simply update the package name in your `package.json` and imports:
+>
+> ```bash
+> npm uninstall vite-plugin-brotli-compress
+> npm install --save-dev vite-plugin-bundler
+> ```
+>
+> ```diff
+> - import brotliCompress from 'vite-plugin-brotli-compress'
+> + import brotliCompress from 'vite-plugin-bundler'
+> ```
 
 ---
 
@@ -73,13 +87,13 @@ This plugin runs **after** Vite's build step. It reads the output directory, com
 
 ```bash
 # npm
-npm install --save-dev vite-plugin-brotli-compress
+npm install --save-dev vite-plugin-bundler
 
 # yarn
-yarn add --dev vite-plugin-brotli-compress
+yarn add --dev vite-plugin-bundler
 
 # pnpm
-pnpm add -D vite-plugin-brotli-compress
+pnpm add -D vite-plugin-bundler
 ```
 
 **Requirements**: Node.js >= 18 | Vite >= 5.0.0
@@ -101,7 +115,7 @@ npm install piscina
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite'
-import brotliCompress from 'vite-plugin-brotli-compress'
+import brotliCompress from 'vite-plugin-bundler'
 
 export default defineConfig({
   plugins: [
@@ -120,7 +134,7 @@ That's it. Run `vite build` and check your `dist/` folder for `.br` files.
 
 ```typescript
 import { defineConfig } from 'vite'
-import brotliCompress, { BrotliQuality, CompressionType, GzipLevel } from 'vite-plugin-brotli-compress'
+import brotliCompress, { BrotliQuality, CompressionType, GzipLevel } from 'vite-plugin-bundler'
 
 export default defineConfig({
   plugins: [
@@ -297,7 +311,7 @@ enum ZstdLevel {
 ```typescript
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import brotliCompress from 'vite-plugin-brotli-compress'
+import brotliCompress from 'vite-plugin-bundler'
 
 export default defineConfig({
   plugins: [
@@ -316,7 +330,7 @@ export default defineConfig({
 ```typescript
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import brotliCompress, { CompressionType } from 'vite-plugin-brotli-compress'
+import brotliCompress, { CompressionType } from 'vite-plugin-bundler'
 
 export default defineConfig({
   plugins: [
@@ -335,7 +349,7 @@ export default defineConfig({
 ```typescript
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
-import brotliCompress from 'vite-plugin-brotli-compress'
+import brotliCompress from 'vite-plugin-bundler'
 
 export default defineConfig({
   plugins: [
@@ -386,7 +400,7 @@ brotliCompress({
 ### Zstd Compression
 
 ```typescript
-import brotliCompress, { CompressionType, ZstdLevel } from 'vite-plugin-brotli-compress'
+import brotliCompress, { CompressionType, ZstdLevel } from 'vite-plugin-bundler'
 
 brotliCompress({
   type: CompressionType.ZSTD,
@@ -633,8 +647,8 @@ npm test -- --grep "v1.3.0"
 Contributions are welcome! Please read our [contributing guidelines](CONTRIBUTING.md) and submit pull requests.
 
 ```bash
-git clone https://github.com/riyajath-ahamed/vite-plugin-brotli-compress.git
-cd vite-plugin-brotli-compress
+git clone https://github.com/riyajath-ahamed/vite-plugin-bundler.git
+cd vite-plugin-bundler
 npm install
 npm test
 npm run build
@@ -655,8 +669,8 @@ See [CHANGELOG.md](CHANGELOG.md) for a full list of changes.
 ---
 
 <p align="center">
-  <a href="https://github.com/riyajath-ahamed/vite-plugin-brotli-compress">GitHub</a> &middot;
-  <a href="https://www.npmjs.com/package/vite-plugin-brotli-compress">npm</a> &middot;
-  <a href="https://github.com/riyajath-ahamed/vite-plugin-brotli-compress/issues">Issues</a> &middot;
-  <a href="https://github.com/riyajath-ahamed/vite-plugin-brotli-compress/discussions">Discussions</a>
+  <a href="https://github.com/riyajath-ahamed/vite-plugin-bundler">GitHub</a> &middot;
+  <a href="https://www.npmjs.com/package/vite-plugin-bundler">npm</a> &middot;
+  <a href="https://github.com/riyajath-ahamed/vite-plugin-bundler/issues">Issues</a> &middot;
+  <a href="https://github.com/riyajath-ahamed/vite-plugin-bundler/discussions">Discussions</a>
 </p>
