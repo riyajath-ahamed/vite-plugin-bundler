@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/riyajath-ahamed/vite-plugin-bundler/blob/main/assets/riyajath-ahamed/vite-plugin-bundler.png" width="640" height="320" />
+<img src="https://github.com/riyajath-ahamed/vite-plugin-bundler/blob/main/assets/riyajath-ahamed/vite-plugin-bundler.png" width="320" height="320" />
 </p>
 
 <h1 align="center">vite-plugin-bundler</h1>
