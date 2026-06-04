@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-bundler",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A high-performance Vite plugin that compresses build assets using Brotli, Gzip, and Zstandard with worker thread support.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
