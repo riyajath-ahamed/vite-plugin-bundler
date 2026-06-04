@@ -83,7 +83,6 @@
   },
   "optionalDependencies": {
     "@mongodb-js/zstd": "^7.0.0",
-    "@rolldown/binding-linux-x64-gnu": "^1.0.0-rc.12",
     "piscina": "^5.1.4"
   },
   "overrides": {
