@@ -42,31 +42,83 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Determine target version
+        id: version
+        run: |
+          CURRENT=$(node -p "require('./package.json').version")
+
+          TAG_CHECK=$(git ls-remote --tags origin "refs/tags/v${CURRENT}" 2>/dev/null || true)
+          LATEST_MSG=$(git log -1 --pretty=%s)
+
+          if echo "$TAG_CHECK" | grep -q "refs/tags/v${CURRENT}" || \
+             echo "$LATEST_MSG" | grep -qF "chore: bump version to ${CURRENT}"; then
+            echo "::notice::Detected partially completed release for v${CURRENT} — resuming"
+            echo "target=${CURRENT}" >> $GITHUB_OUTPUT
+            echo "is_retry=true" >> $GITHUB_OUTPUT
+          else
+            npm version ${{ inputs.version_type }} --no-git-tag-version
+            TARGET=$(node -p "require('./package.json').version")
+            echo "::notice::Preparing fresh release v${TARGET}"
+            echo "target=${TARGET}" >> $GITHUB_OUTPUT
+            echo "is_retry=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check existing release artifacts
+        id: state
+        run: |
+          VERSION="${{ steps.version.outputs.target }}"
+
+          NPM_PUBLISHED=false
+          if npm view "vite-plugin-bundler@${VERSION}" version >/dev/null 2>&1; then
+            NPM_PUBLISHED=true
+            echo "::notice::v${VERSION} already on npm — skipping publish"
+          fi
+          echo "npm_published=${NPM_PUBLISHED}" >> $GITHUB_OUTPUT
+
+          TAG_EXISTS=false
+          if git ls-remote --tags origin "refs/tags/v${VERSION}" | grep -q .; then
+            TAG_EXISTS=true
+            echo "::notice::Tag v${VERSION} already exists — skipping git push"
+          fi
+          echo "tag_exists=${TAG_EXISTS}" >> $GITHUB_OUTPUT
+
+          GH_RELEASE=false
+          if gh release view "v${VERSION}" --json tagName >/dev/null 2>&1; then
+            GH_RELEASE=true
+            echo "::notice::GitHub Release v${VERSION} exists — skipping release creation"
+          fi
+          echo "gh_release_exists=${GH_RELEASE}" >> $GITHUB_OUTPUT
+
+          if [ "$NPM_PUBLISHED" = "true" ] && [ "$TAG_EXISTS" = "true" ] && [ "$GH_RELEASE" = "true" ]; then
+            echo "::warning::Release v${VERSION} is already fully complete — nothing to do"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build package
         run: npm run build
 
       - name: Run tests
         run: npm run test:run
 
-      - name: Bump version
-        id: bump
-        run: |
-          npm version ${{ github.event.inputs.version_type }} --no-git-tag-version
-          NEW_VERSION=$(node -p "require('./package.json').version")
-          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
-
-      - name: Commit, tag, and push
-        run: |
-          git add package.json package-lock.json
-          git commit -m "chore: bump version to ${{ steps.bump.outputs.version }} [skip ci]"
-          git tag "v${{ steps.bump.outputs.version }}"
-          git push origin main
-          git push origin "v${{ steps.bump.outputs.version }}"
-
       - name: Publish to npm
+        id: publish
+        if: steps.state.outputs.npm_published != 'true'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit, tag, and push version bump
+        id: push
+        if: steps.state.outputs.tag_exists != 'true'
+        run: |
+          git add package.json package-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: bump version to ${{ steps.version.outputs.target }} [skip ci]"
+            git push origin main
+          fi
+          git tag "v${{ steps.version.outputs.target }}"
+          git push origin "v${{ steps.version.outputs.target }}"
 
       - name: Generate changelog
         id: changelog
@@ -86,20 +138,43 @@ jobs:
           fi
 
       - name: Create GitHub Release
+        id: gh_release
+        if: steps.state.outputs.gh_release_exists != 'true'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.bump.outputs.version }}
-          name: Release v${{ steps.bump.outputs.version }}
+          tag_name: v${{ steps.version.outputs.target }}
+          name: Release v${{ steps.version.outputs.target }}
           body: |
-            ## Release v${{ steps.bump.outputs.version }}
+            ## Release v${{ steps.version.outputs.target }}
 
             ### Changes
             ${{ steps.changelog.outputs.changelog }}
 
             ### Installation
             ```bash
-            npm install vite-plugin-bundler@${{ steps.bump.outputs.version }}
+            npm install vite-plugin-bundler@${{ steps.version.outputs.target }}
             ```
 
             ### Documentation
             Full documentation: https://github.com/riyajath-ahamed/vite-plugin-bundler#readme
+
+      - name: Release summary
+        if: always()
+        run: |
+          VERSION="${{ steps.version.outputs.target }}"
+          echo "## Release v${VERSION}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.version.outputs.is_retry }}" = "true" ]; then
+            echo "> Retried from a previous failed attempt." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "| Step | Result |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| npm publish | \`${{ steps.publish.outcome }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Git tag & push | \`${{ steps.push.outcome }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| GitHub Release | \`${{ steps.gh_release.outcome }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ job.status }}" = "failure" ]; then
+            echo "> **To retry:** Fix the underlying issue and re-run this workflow with the same inputs." >> $GITHUB_STEP_SUMMARY
+            echo "> Completed steps will be automatically skipped." >> $GITHUB_STEP_SUMMARY
+          fi
