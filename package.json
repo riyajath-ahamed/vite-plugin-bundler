@@ -23,7 +23,9 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "tsdown",
+    "prebuild": "rm -rf dist",
+    "build": "rollup -c rollup.config.mjs",
+    "postbuild": "rm -rf dist/types",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -71,12 +73,15 @@
     "vite": ">=5.0.0 <8.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.0",
     "@types/node": "^24.12.2",
     "@vitest/coverage-v8": "^4.1.4",
     "@vitest/ui": "^4.1.4",
     "eslint": "^10.3.0",
     "piscina": "^5.1.4",
-    "tsdown": "^0.21.7",
+    "rollup": "^4.34.0",
+    "rollup-plugin-dts": "^6.2.0",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.59.1",
     "vitest": "^4.1.4"
